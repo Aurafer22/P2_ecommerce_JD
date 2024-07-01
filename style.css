@@ -224,6 +224,12 @@ main {
   gap: 32px;
   padding: 37px 0px;
 }
+h2 {
+  color: var(--ar-color-black);
+  font-size: 22px;
+  font-weight: 400;
+  text-align: center;
+}
 .artProduct {
   background-color: var(--ar-color-white);
   min-width: 320px;

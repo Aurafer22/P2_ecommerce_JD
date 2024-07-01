@@ -48,9 +48,14 @@ closeResponsive.addEventListener('click', () => {
 const main = document.querySelector('main')
 main.classList = 'flex-container'
 
-function printSelection(array) {
+function printSelection(array, isSugest = false) {
   const resultsContainer = document.querySelector('main')
   resultsContainer.innerHTML = ''
+  if (isSugest) {
+    const h2Sugest = document.createElement('h2')
+    h2Sugest.textContent = 'Sugerencia de productos'
+    resultsContainer.append(h2Sugest)
+  }
   for (const product of array) {
     const artProduct = document.createElement('article')
     artProduct.classList.add('artProduct')
@@ -168,7 +173,6 @@ filterIcon.addEventListener('click', getOpenFilter)
 function getFiltered(e) {
   e.preventDefault()
   const selection = []
-  const sugest = {}
   const priceValue = parseInt(priceInput.value)
   for (const product of products) {
     if (brandInput.value === 'Todas las marcas' && isNaN(priceValue)) {
@@ -181,25 +185,24 @@ function getFiltered(e) {
     ) {
       selection.push(product)
     }
-    if (
-      !sugest[product.brand] ||
-      product.price < parseFloat(sugest[product.brand].price)
-    ) {
-      sugest[product.brand] = product
-    }
   }
   if (selection.length === 0) {
-    for (const brand in sugest) {
-      if (
-        (brandInput.value === brand ||
-          brandInput.value === 'Todas las marcas') &&
-        parseFloat(sugest[brand].price) > priceValue
-      ) {
-        selection.push(sugest[brand])
+    const sugest = []
+    while (sugest.length < 3) {
+      const randomIndex = Math.floor(Math.random() * products.length)
+      const randomProduct = products[randomIndex]
+      if (!sugest.includes(randomProduct)) {
+        sugest.push(randomProduct)
       }
     }
+    const titleSugest = document.querySelector('main')
+    const h2Sugest = document.createElement('h2')
+    h2Sugest.textContent = 'Sugerencia de productos'
+    main.append(h2Sugest)
+    printSelection(sugest, true)
+  } else {
+    printSelection(selection)
   }
-  printSelection(selection)
 }
 
 form.addEventListener('submit', getFiltered)
