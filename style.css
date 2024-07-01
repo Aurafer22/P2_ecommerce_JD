@@ -57,6 +57,7 @@ header {
 }
 .menu-nav {
   text-shadow: black 0 0 5px;
+  transition: all 0.5s;
 }
 .menu-nav :hover {
   color: var(--ar-Color-acent);
@@ -178,6 +179,7 @@ header {
 .divButtons {
   display: flex;
   gap: 9px;
+  margin-top: 20px;
 }
 .filterON {
   display: flex;
@@ -269,6 +271,10 @@ h4 {
   align-self: center;
   margin-top: 10px;
   cursor: pointer;
+  transition: all 0.5s;
+}
+.button:hover {
+  background-color: var(--ar-Color-acent);
 }
 footer {
   width: 100%;

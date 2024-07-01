@@ -1,4 +1,3 @@
-
 // const getSelection = (e) => {
 //   e.preventDefault()
 //   const selection = []
@@ -78,4 +77,13 @@
 //     }
 //   }
 //   return printSelection(selection)
+// }
+
+// else if (
+//   (brandInput.value === product.brand ||
+//     brandInput.value === 'Todas las marcas') &&
+//   (isNaN(priceValue) || priceValue <= product.price)
+// ) {
+//   sugest.push(Math.min(product.price))
+//   printSelection(sugest)
 // }

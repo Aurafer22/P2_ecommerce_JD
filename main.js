@@ -4,7 +4,6 @@ import { products } from './public/products/products.js'
 // Menu responsive
 
 const openResponsive = document.querySelector('#openResponsive')
-// const closeResponsive = document.querySelector('#closeResponsive')
 const logoResponsive = document.querySelector('#logo')
 const menuResponsive = document.querySelector('#menuResponsive')
 const navResponsive = document.querySelector('#navResponsive')
@@ -94,10 +93,26 @@ form.classList.add('form')
 form.id = 'form'
 const divInputs = document.createElement('div')
 divInputs.classList.add('divInputs')
-const brandInput = document.createElement('input')
+const brandInput = document.createElement('select')
 brandInput.id = 'brandInput'
 brandInput.placeholder = 'Todas las marcas'
 brandInput.classList.add('inputClass')
+const allBrands = document.createElement('option')
+allBrands.value = 'Todas las marcas'
+allBrands.textContent = 'Todas las marcas'
+brandInput.append(allBrands)
+const newBalance = document.createElement('option')
+newBalance.value = 'New Balance'
+newBalance.textContent = 'New Balance'
+brandInput.append(newBalance)
+const nike = document.createElement('option')
+nike.value = 'Nike Original'
+nike.textContent = 'Nike Original'
+brandInput.append(nike)
+const adidas = document.createElement('option')
+adidas.value = 'Adidas Original'
+adidas.textContent = 'Adidas Original'
+brandInput.append(adidas)
 divInputs.append(brandInput)
 const priceInput = document.createElement('input')
 priceInput.id = 'priceInput'
@@ -150,30 +165,47 @@ openFilter.addEventListener('click', () => {
 filterIcon.addEventListener('click', getOpenFilter)
 
 // Selector de productos
-
 function getFiltered(e) {
   e.preventDefault()
   const selection = []
-  const brandValue = brandInput.value.toLowerCase() || ''
+  const sugest = {}
   const priceValue = parseInt(priceInput.value)
-
   for (const product of products) {
-    const productBrand = product.brand.toLowerCase()
+    if (brandInput.value === 'Todas las marcas' && isNaN(priceValue)) {
+      printSelection(products)
+    }
     if (
-      productBrand.includes(brandValue) &&
+      (brandInput.value === product.brand ||
+        brandInput.value === 'Todas las marcas') &&
       (isNaN(priceValue) || product.price <= priceValue)
     ) {
       selection.push(product)
     }
+    if (
+      !sugest[product.brand] ||
+      product.price < parseFloat(sugest[product.brand].price)
+    ) {
+      sugest[product.brand] = product
+    }
   }
-  console.log(selection)
+  if (selection.length === 0) {
+    for (const brand in sugest) {
+      if (
+        (brandInput.value === brand ||
+          brandInput.value === 'Todas las marcas') &&
+        parseFloat(sugest[brand].price) > priceValue
+      ) {
+        selection.push(sugest[brand])
+      }
+    }
+  }
   printSelection(selection)
 }
 
 form.addEventListener('submit', getFiltered)
 
 cleanButton.addEventListener('click', () => {
-  brandInput.value = ''
+  brandInput.value = 'Todas las marcas'
   priceInput.value = ''
   printSelection(products)
 })
