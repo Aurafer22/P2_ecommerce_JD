@@ -4,13 +4,14 @@ import { products } from './public/products/products.js'
 // Menu responsive
 
 const openResponsive = document.querySelector('#openResponsive')
-const closeResponsive = document.querySelector('#closeResponsive')
+// const closeResponsive = document.querySelector('#closeResponsive')
 const logoResponsive = document.querySelector('#logo')
 const menuResponsive = document.querySelector('#menuResponsive')
 const navResponsive = document.querySelector('#navResponsive')
 const ulResponsive = document.querySelector('#ulResponsive')
 const liResponsive = document.querySelector('#ulResponsive > li')
 const loginResponsive = document.querySelector('#login')
+const closeResponsive = document.createElement('button')
 
 openResponsive.addEventListener('click', () => {
   logoResponsive.classList.add('responsive')
@@ -20,8 +21,12 @@ openResponsive.addEventListener('click', () => {
   ulResponsive.classList.add('ul-responsive')
   liResponsive.classList.add('li-responsive')
   loginResponsive.classList.add('responsive')
+  closeResponsive.textContent = 'X'
+  closeResponsive.id = 'close-responsive'
+  closeResponsive.classList.add('flex-container')
   closeResponsive.classList.add('close-responsive')
   closeResponsive.classList.add('responsive')
+  navResponsive.append(closeResponsive)
   closeResponsive.classList.remove('nav')
   if (!logoResponsive) {
     navResponsive.classList.remove('nav-responsive')
@@ -44,10 +49,10 @@ closeResponsive.addEventListener('click', () => {
 const main = document.querySelector('main')
 main.classList = 'flex-container'
 
-function printSelection() {
+function printSelection(array) {
   const resultsContainer = document.querySelector('main')
   resultsContainer.innerHTML = ''
-  for (const product of products) {
+  for (const product of array) {
     const artProduct = document.createElement('article')
     artProduct.classList.add('artProduct')
     const divImgProduct = document.createElement('div')
@@ -145,20 +150,6 @@ openFilter.addEventListener('click', () => {
 filterIcon.addEventListener('click', getOpenFilter)
 
 // Selector de productos
-
-// function getFiltered(e) {
-//   e.preventDefault()
-//   const selection = []
-//   for (const product of products) {
-//     const userBrand = product.brand
-//     const userPrice = product.price
-//     if (userBrand.toLowerCase().includes(brandInput.value.toLowerCase())) {
-//       selection.push(product)
-//     }
-//   }
-//   printSelection(selection)
-// }
-// form.addEventListener('submit', getFiltered)
 
 function getFiltered(e) {
   e.preventDefault()
