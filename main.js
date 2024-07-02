@@ -1,4 +1,6 @@
 import './style.css'
+import './public/header/header.js'
+import './public/footer/footer.js'
 import { products } from './public/products/products.js'
 
 // Menu responsive

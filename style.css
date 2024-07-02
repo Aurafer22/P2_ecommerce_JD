@@ -12,6 +12,7 @@
 a {
   text-decoration: none;
   color: var(--ar-color-white);
+  cursor: pointer;
 }
 :root {
   font-family: 'Inter', sans-serif;
@@ -311,6 +312,7 @@ footer > nav {
   text-align: left;
   justify-self: left;
 }
+
 .ul-footer > li:first-child {
   font-weight: 800;
 }
@@ -376,6 +378,6 @@ footer > nav {
     gap: 30px;
   }
   footer > nav {
-    gap: 50px;
+    gap: 100px;
   }
 }
